@@ -19,18 +19,18 @@
 <meta property="og:site_name" content="幸福的小猪">
 <meta property="og:description" content="Table of Contents generated with DocToc  事件机制 事件触发三阶段 注册事件 事件代理   跨域 JSONP CORS document.domain postMessage   Event loop Node 中的 Event loop timer I&#x2F;O idle, prepare poll check close callbacks     存储">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://mishudaoshui.github.io/images/2019-06-01-042724.png">
-<meta property="og:image" content="https://mishudaoshui.github.io/images/2019-06-01-042727.png">
-<meta property="og:image" content="https://mishudaoshui.github.io/images/2019-06-01-042730.png">
-<meta property="og:image" content="https://mishudaoshui.github.io/images/2019-06-01-042733.png">
-<meta property="og:image" content="https://mishudaoshui.github.io/images/2019-06-01-042734.png">
-<meta property="og:image" content="https://mishudaoshui.github.io/images/2019-06-01-042735.png">
-<meta property="og:image" content="https://mishudaoshui.github.io/images/2019-06-01-042737.png">
+<meta property="og:image" content="https://mishudaoshui.github.io/github.io/images/2019-06-01-042724.png">
+<meta property="og:image" content="https://mishudaoshui.github.io/github.io/images/2019-06-01-042727.png">
+<meta property="og:image" content="https://mishudaoshui.github.io/github.io/images/2019-06-01-042730.png">
+<meta property="og:image" content="https://mishudaoshui.github.io/github.io/images/2019-06-01-042733.png">
+<meta property="og:image" content="https://mishudaoshui.github.io/github.io/images/2019-06-01-042734.png">
+<meta property="og:image" content="https://mishudaoshui.github.io/github.io/images/2019-06-01-042735.png">
+<meta property="og:image" content="https://mishudaoshui.github.io/github.io/images/2019-06-01-042737.png">
 <meta property="article:published_time" content="2021-07-15T03:51:31.000Z">
 <meta property="article:modified_time" content="2021-07-15T06:17:34.920Z">
 <meta property="article:author" content="Mr Zhang">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://mishudaoshui.github.io/images/2019-06-01-042724.png">
+<meta name="twitter:image" content="https://mishudaoshui.github.io/github.io/images/2019-06-01-042724.png">
 
   <meta name="keywords" content="">
   <meta name="format-detection" content="telephone=no,email=no">
@@ -183,7 +183,7 @@
   <style>#main article .mdui-card-content .center-block{display:block!important;margin-right:auto!important;margin-left:auto!important}</style>
   <article class="mdui-card mdui-m-b-5">
     <header class="mdui-card-media">
-      <img src="/images/random/material-16.png" style="max-height: 240px;">
+      <img src="/images/random/material-7.png" style="max-height: 240px;">
       <div class="mdui-card-media-covered">
         <div class="mdui-card-primary">
           <div class="mdui-card-primary-title">浏览器相关</div>
@@ -444,11 +444,11 @@
 <p>目前该技术通常用来做缓存文件，提高首屏速度，可以试着来实现这个功能。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// index.js</span></span><br><span class="line"><span class="keyword">if</span> (navigator.serviceWorker) &#123;</span><br><span class="line">  navigator.serviceWorker</span><br><span class="line">    .register(<span class="string">&quot;sw.js&quot;</span>)</span><br><span class="line">    .then(<span class="function"><span class="keyword">function</span> (<span class="params">registration</span>) </span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">&quot;service worker 注册成功&quot;</span>);</span><br><span class="line">    &#125;)</span><br><span class="line">    .catch(<span class="function"><span class="keyword">function</span> (<span class="params">err</span>) </span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">&quot;servcie worker 注册失败&quot;</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// sw.js</span></span><br><span class="line"><span class="comment">// 监听 `install` 事件，回调中缓存所需文件</span></span><br><span class="line">self.addEventListener(<span class="string">&quot;install&quot;</span>, <span class="function">(<span class="params">e</span>) =&gt;</span> &#123;</span><br><span class="line">  e.waitUntil(</span><br><span class="line">    caches.open(<span class="string">&quot;my-cache&quot;</span>).then(<span class="function"><span class="keyword">function</span> (<span class="params">cache</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> cache.addAll([<span class="string">&quot;./index.html&quot;</span>, <span class="string">&quot;./index.js&quot;</span>]);</span><br><span class="line">    &#125;)</span><br><span class="line">  );</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 拦截所有请求事件</span></span><br><span class="line"><span class="comment">// 如果缓存中已经有请求的数据就直接用缓存，否则去请求数据</span></span><br><span class="line">self.addEventListener(<span class="string">&quot;fetch&quot;</span>, <span class="function">(<span class="params">e</span>) =&gt;</span> &#123;</span><br><span class="line">  e.respondWith(</span><br><span class="line">    caches.match(e.request).then(<span class="function"><span class="keyword">function</span> (<span class="params">response</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (response) &#123;</span><br><span class="line">        <span class="keyword">return</span> response;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">&quot;fetch source&quot;</span>);</span><br><span class="line">    &#125;)</span><br><span class="line">  );</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 
-<p>打开页面，可以在开发者工具中的 <code>Application</code> 看到 Service Worker 已经启动了<img src="/images/2019-06-01-042724.png"></p>
+<p>打开页面，可以在开发者工具中的 <code>Application</code> 看到 Service Worker 已经启动了<img src="/github.io/images/2019-06-01-042724.png"></p>
 <p>在 Cache 中也可以发现我们所需的文件已被缓存</p>
-<p><img src="/images/2019-06-01-042727.png"></p>
+<p><img src="/github.io/images/2019-06-01-042727.png"></p>
 <p>当我们重新刷新页面可以发现我们缓存的数据是从 Service Worker 中读取的</p>
-<p><img src="/images/2019-06-01-042730.png"></p>
+<p><img src="/github.io/images/2019-06-01-042730.png"></p>
 <h1 id="渲染机制"><a href="#渲染机制" class="headerlink" title="渲染机制"></a>渲染机制</h1><p>浏览器的渲染机制一般分为以下几个步骤</p>
 <ol>
 <li>处理 HTML 并构建 DOM 树。</li>
@@ -457,11 +457,11 @@
 <li>根据渲染树来布局，计算每个节点的位置。</li>
 <li>调用 GPU 绘制，合成图层，显示在屏幕上。</li>
 </ol>
-<p><img src="/images/2019-06-01-042733.png"></p>
+<p><img src="/github.io/images/2019-06-01-042733.png"></p>
 <p>在构建 CSSOM 树时，会阻塞渲染，直至 CSSOM 树构建完成。并且构建 CSSOM 树是一个十分消耗性能的过程，所以应该尽量保证层级扁平，减少过度层叠，越是具体的 CSS 选择器，执行速度越慢。</p>
 <p>当 HTML 解析到 script 标签时，会暂停构建 DOM，完成后才会从暂停的地方重新开始。也就是说，如果你想首屏渲染的越快，就越不应该在首屏就加载 JS 文件。并且 CSS 也会影响 JS 的执行，只有当解析完样式表才会执行 JS，所以也可以认为这种情况下，CSS 也会暂停构建 DOM。</p>
-<p><img src="/images/2019-06-01-042734.png"></p>
-<p><img src="/images/2019-06-01-042735.png"></p>
+<p><img src="/github.io/images/2019-06-01-042734.png"></p>
+<p><img src="/github.io/images/2019-06-01-042735.png"></p>
 <h2 id="Load-和-DOMContentLoaded-区别"><a href="#Load-和-DOMContentLoaded-区别" class="headerlink" title="Load 和 DOMContentLoaded 区别"></a>Load 和 DOMContentLoaded 区别</h2><p>Load 事件触发代表页面中的 DOM，CSS，JS，图片已经全部加载完毕。</p>
 <p>DOMContentLoaded 事件触发代表初始的 HTML 被完全加载和解析，不需要等待 CSS，JS，图片加载。</p>
 <h2 id="图层"><a href="#图层" class="headerlink" title="图层"></a>图层</h2><p>一般来说，可以把普通文档流看成一个图层。特定的属性可以生成一个新的图层。<strong>不同的图层渲染互不影响</strong>，所以对于某些频繁需要渲染的建议单独生成一个新图层，提高性能。<strong>但也不能生成过多的图层，会引起反作用。</strong></p>
@@ -517,7 +517,7 @@
 <li><p>CSS 选择符从右往左匹配查找，避免 DOM 深度过深</p>
 </li>
 <li><p>将频繁运行的动画变为图层，图层能够阻止该节点回流影响别的元素。比如对于 <code>video</code> 标签，浏览器会自动将该节点变为图层。</p>
-<p><img src="/images/2019-06-01-042737.png"></p>
+<p><img src="/github.io/images/2019-06-01-042737.png"></p>
 </li>
 </ul>
 

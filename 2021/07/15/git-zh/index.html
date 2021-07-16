@@ -19,14 +19,14 @@
 <meta property="og:site_name" content="幸福的小猪">
 <meta property="og:description" content="Table of Contents generated with DocToc  Rebase 合并 stash reflog Reset    本文不会介绍 Git 的基本操作，会对一些高级操作进行说明。 Rebase 合并该命令可以让和 merge 命令得到的结果基本是一致的。 通常使用 merge 操作将分支上的代码合并到 master 中，分支样子如下所示  使用 rebase 后，">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://mishudaoshui.github.io/images/2019-06-01-043128.png">
-<meta property="og:image" content="https://mishudaoshui.github.io/images/2019-06-01-043129.png">
-<meta property="og:image" content="https://mishudaoshui.github.io/images/2019-06-01-43130.png">
+<meta property="og:image" content="https://mishudaoshui.github.io/github.io/images/2019-06-01-043128.png">
+<meta property="og:image" content="https://mishudaoshui.github.io/github.io/images/2019-06-01-043129.png">
+<meta property="og:image" content="https://mishudaoshui.github.io/github.io/images/2019-06-01-43130.png">
 <meta property="article:published_time" content="2021-07-15T03:54:17.000Z">
 <meta property="article:modified_time" content="2021-07-15T06:27:39.724Z">
 <meta property="article:author" content="Mr Zhang">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://mishudaoshui.github.io/images/2019-06-01-043128.png">
+<meta name="twitter:image" content="https://mishudaoshui.github.io/github.io/images/2019-06-01-043128.png">
 
   <meta name="keywords" content="">
   <meta name="format-detection" content="telephone=no,email=no">
@@ -179,7 +179,7 @@
   <style>#main article .mdui-card-content .center-block{display:block!important;margin-right:auto!important;margin-left:auto!important}</style>
   <article class="mdui-card mdui-m-b-5">
     <header class="mdui-card-media">
-      <img src="/images/random/material-16.png" style="max-height: 240px;">
+      <img src="/images/random/material-8.png" style="max-height: 240px;">
       <div class="mdui-card-media-covered">
         <div class="mdui-card-primary">
           <div class="mdui-card-primary-title">git知识</div>
@@ -244,9 +244,9 @@
 <p>本文不会介绍 Git 的基本操作，会对一些高级操作进行说明。</p>
 <h2 id="Rebase-合并"><a href="#Rebase-合并" class="headerlink" title="Rebase 合并"></a>Rebase 合并</h2><p>该命令可以让和 <code>merge</code> 命令得到的结果基本是一致的。</p>
 <p>通常使用 <code>merge</code> 操作将分支上的代码合并到 <code>master</code> 中，分支样子如下所示</p>
-<p><img src="/images/2019-06-01-043128.png"></p>
+<p><img src="/github.io/images/2019-06-01-043128.png"></p>
 <p>使用 <code>rebase</code> 后，会将 <code>develop</code> 上的 <code>commit</code> 按顺序移到 <code>master</code> 的第三个 <code>commit</code> 后面，分支样子如下所示</p>
-<p><img src="/images/2019-06-01-043129.png"></p>
+<p><img src="/github.io/images/2019-06-01-043129.png"></p>
 <p>Rebase 对比 merge，优势在于合并后的结果很清晰，只有一条线，劣势在于如果一旦出现冲突，解决冲突很麻烦，可能要解决多个冲突，但是 merge 出现冲突只需要解决一次。</p>
 <p>使用 rebase 应该在需要被 rebase 的分支上操作，并且该分支是本地分支。如果 <code>develop</code> 分支需要 rebase 到 <code>master</code> 上去，那么应该如下操作</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"><span class="comment"># branch develop</span></span></span><br><span class="line">git rebase master</span><br><span class="line">git checkout master</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment"># 用于将 `master` 上的 HEAD 移动到最新的 commit</span></span></span><br><span class="line">git merge develop</span><br></pre></td></tr></table></figure>
@@ -259,7 +259,7 @@
 
 <p>这样你之前临时保存的代码又回来了</p>
 <h2 id="reflog"><a href="#reflog" class="headerlink" title="reflog"></a>reflog</h2><p><code>reflog</code> 可以看到 HEAD 的移动记录，假如之前误删了一个分支，可以通过 <code>git reflog</code> 看到移动 HEAD 的哈希值</p>
-<p><img src="/images/2019-06-01-43130.png"></p>
+<p><img src="/github.io/images/2019-06-01-43130.png"></p>
 <p>从图中可以看出，HEAD 的最后一次移动行为是 <code>merge</code> 后，接下来分支 <code>new</code> 就被删除了，那么我们可以通过以下命令找回 <code>new</code> 分支</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git checkout 37d9aca</span><br><span class="line">git checkout -b new</span><br></pre></td></tr></table></figure>
 
