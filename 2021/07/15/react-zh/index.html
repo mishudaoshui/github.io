@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+  <meta name="renderer" content="webkit">
+
+  
+  <title>react相关知识 | 幸福的小猪</title>
+
+  <link rel="shortcut icon" href="/github.io/images/favicon.png">
+  <link rel="alternate" href="/github.io/atom.xml" title="幸福的小猪" type="application/atom+xml">
+  <meta name="description" content="Table of Contents generated with DocToc  React 生命周期分析 V16 生命周期函数用法建议   setState Redux 源码分析    React 生命周期分析在 V16 版本中引入了 Fiber 机制。这个机制一定程度上的影响了部分生命周期的调用，并且也引入了新的 2 个 API 来解决问题。 在之前的版本中，如果你拥有一个很复杂的复合组">
+<meta property="og:type" content="article">
+<meta property="og:title" content="react相关知识">
+<meta property="og:url" content="https://mishudaoshui.github.io/github.io/2021/07/15/react-zh/index.html">
+<meta property="og:site_name" content="幸福的小猪">
+<meta property="og:description" content="Table of Contents generated with DocToc  React 生命周期分析 V16 生命周期函数用法建议   setState Redux 源码分析    React 生命周期分析在 V16 版本中引入了 Fiber 机制。这个机制一定程度上的影响了部分生命周期的调用，并且也引入了新的 2 个 API 来解决问题。 在之前的版本中，如果你拥有一个很复杂的复合组">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://yck-1254263422.cos.ap-shanghai.myqcloud.com/blog/2019-06-01-042522.png">
+<meta property="og:image" content="https://yck-1254263422.cos.ap-shanghai.myqcloud.com/blog/2019-06-01-042523.png">
+<meta property="article:published_time" content="2021-07-15T03:53:33.000Z">
+<meta property="article:modified_time" content="2021-07-16T03:35:09.756Z">
+<meta property="article:author" content="Mr Zhang">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://yck-1254263422.cos.ap-shanghai.myqcloud.com/blog/2019-06-01-042522.png">
+
+  <meta name="keywords" content="">
+  <meta name="format-detection" content="telephone=no,email=no">
+  <meta name="theme-color" content="#9C27B0">
+
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="application-name" content="幸福的小猪">
+  <meta name="msapplication-starturl" content="https://mishudaoshui.github.io/github.io/github.io/2021/07/15/react-zh/">
+  <meta name="msapplication-navbutton-color" content="#9C27B0">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="幸福的小猪">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <link rel="apple-touch-icon" href="/github.io/images/favicon.png">
+
+  
+    <link rel="canonical" href="https://mishudaoshui.github.io/github.io/github.io/2021/07/15/react-zh/">
+  
+
+  
+  
+
+  
+  
+  
+
+  
+<link rel="stylesheet" href="/github.io/css/mdui.css">
+<link rel="stylesheet" href="/github.io/css/style.css">
+
+  
+<link rel="stylesheet" href="/github.io/custom.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+<body class="mdui-appbar-with-toolbar mdui-theme-primary-indigo mdui-theme-accent-pink">
+  <script>var a=localStorage.getItem("mdui-theme-layout-dark");if(a){document.getElementsByTagName("body")[0].className+=" mdui-theme-layout-dark"};</script>
+  <script>if(window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches){document.getElementsByTagName("body")[0].className+=" mdui-theme-layout-dark"};</script>
+  <script>var a=localStorage.getItem("mdui-drawer-close");if(!a){document.getElementsByTagName("body")[0].className+=" mdui-drawer-body-left"};</script>
+  <header id="header" class="mdui-appbar mdui-appbar-fixed mdui-appbar-scroll-hide mdui-appbar-inset">
+  <div class="mdui-toolbar mdui-color-theme">
+    <a href="javascript:;" class="mdui-btn mdui-btn-icon" mdui-drawer="{target: '#sidebar', swipe: true}"><i class="mdui-icon material-icons">menu</i></a>
+    <a href="/github.io/" class="mdui-typo-headline">幸福的小猪</a>
+    <div class="mdui-toolbar-spacer"></div>
+    <a href="javascript:;" class="mdui-btn mdui-btn-icon" mdui-dialog="{target: '#search'}" mdui-tooltip="{content: '搜索'}"><i class="mdui-icon material-icons">search</i></a>
+    <a href="/github.io/atom.xml" class="mdui-btn mdui-btn-icon" mdui-tooltip="{content: 'RSS'}"><i class="mdui-icon material-icons">rss_feed</i></a>
+  </div>
+</header>
+<div class="mdui-dialog" id="search">
+  
+    <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="请输入关键字"><input type="hidden" name="sitesearch" value="https://mishudaoshui.github.io/github.io"></form>
+    <div class="search-result"></div>
+  
+</div>
+  <aside id="sidebar" class="mdui-drawer mdui-drawer-full-height">
+  <script>var a=localStorage.getItem("mdui-drawer-close");if(a){document.getElementById("sidebar").className+=" mdui-drawer-close"};</script>
+  <div class="mdui-grid-tile">
+    <img src="/github.io/images/banner.png" style="height: 160px;">
+    <img src="/github.io/images/avatar.png" class="avatar-animation" style="position: absolute; top: 10%; left: 24px; width: 64px; height: 64px; border: 2px solid #fff; border-radius: 50%;">
+    <div class="mdui-grid-tile-actions">
+      <div class="mdui-grid-tile-text">
+        <div class="mdui-grid-tile-title">Mr Zhang</div>
+        <div class="mdui-grid-tile-subtitle"><i class="mdui-icon material-icons">art_track</i>believe that tomorrow will be better</div>
+      </div>
+      
+    </div>
+  </div>
+
+  <div class="mdui-list" mdui-collapse="{accordion: true}">
+    <a href="/github.io/" class="mdui-list-item mdui-ripple">
+      <i class="mdui-list-item-icon mdui-icon material-icons mdui-text-color-blue">home</i>
+      <div class="mdui-list-item-content">主页</div>
+    </a>
+    <div class="mdui-collapse-item">
+      <script>var a=localStorage.getItem("mdui-collapse-item-0");if(a){document.getElementsByClassName("mdui-collapse-item")[0].className+=" mdui-collapse-item-open"};</script>
+      <div class="mdui-collapse-item-header mdui-list-item mdui-ripple">
+        <i class="mdui-list-item-icon mdui-icon material-icons mdui-text-color-deep-orange">archive</i>
+        <div class="mdui-list-item-content">归档</div>
+        <i class="mdui-collapse-item-arrow mdui-icon material-icons">keyboard_arrow_down</i>
+      </div>
+      <div class="mdui-collapse-item-body mdui-list mdui-list-dense">
+        
+        <a class="mdui-ripple sidebar_archives-link" href="/github.io/archives/2021/07/">七月 2021<span class="mdui-ripple sidebar_archives-count">14</span></a>
+        
+      </div>
+    </div>
+    <div class="mdui-collapse-item">
+      <script>var a=localStorage.getItem("mdui-collapse-item-1");if(a){document.getElementsByClassName("mdui-collapse-item")[1].className+=" mdui-collapse-item-open"};</script>
+      <div class="mdui-collapse-item-header mdui-list-item mdui-ripple">
+        <i class="mdui-list-item-icon mdui-icon material-icons mdui-text-color-green">class</i>
+        <div class="mdui-list-item-content">分类</div>
+        <i class="mdui-collapse-item-arrow mdui-icon material-icons">keyboard_arrow_down</i>
+      </div>
+      <div class="mdui-collapse-item-body mdui-list mdui-list-dense">
+        
+        
+        
+          <a href="javascript:;" class="mdui-list-item mdui-p-l-2 mdui-text-color-theme mdui-ripple" style="justify-content: center;">分类为空</a>
+        
+      </div>
+    </div>
+    <div class="mdui-collapse-item">
+      <script>var a=localStorage.getItem("mdui-collapse-item-2");if(a){document.getElementsByClassName("mdui-collapse-item")[2].className+=" mdui-collapse-item-open"};</script>
+      <div class="mdui-collapse-item-header mdui-list-item mdui-ripple">
+        <i class="mdui-list-item-icon mdui-icon material-icons mdui-text-color-brown">bookmark</i>
+        <div class="mdui-list-item-content">标签</div>
+        <i class="mdui-collapse-item-arrow mdui-icon material-icons">keyboard_arrow_down</i>
+      </div>
+      <div class="mdui-collapse-item-body mdui-list mdui-list-dense">
+        
+        
+        
+          <a href="javascript:;" class="mdui-list-item mdui-p-l-2 mdui-text-color-theme mdui-ripple" style="justify-content: center;">标签为空</a>
+        
+      </div>
+    </div>
+    <a href="/github.io/about" class="mdui-list-item mdui-ripple">
+      <i class="mdui-list-item-icon mdui-icon material-icons mdui-text-color-purple">person</i>
+      <div class="mdui-list-item-content">关于</div>
+    </a>
+  </div>
+
+  <div class="mdui-divider"></div>
+
+  <div class="mdui-list" mdui-collapse="{accordion: true}">
+    
+      <a href="/github.io/timeline" class="mdui-list-item mdui-ripple">时间轴</a>
+    
+      <a href="/github.io/tagcloud" class="mdui-list-item mdui-ripple">标签云</a>
+    
+      <a href="/github.io/gallery" class="mdui-list-item mdui-ripple">相册</a>
+    
+    <div class="mdui-collapse-item">
+      <script>var a=localStorage.getItem("mdui-collapse-item-3");if(a){document.getElementsByClassName("mdui-collapse-item")[3].className+=" mdui-collapse-item-open"};</script>
+      <div class="mdui-collapse-item-header mdui-list-item mdui-ripple">
+        <div class="mdui-list-item-content">友情链接</div>
+        <i class="mdui-list-item-icon mdui-icon material-icons">link</i>
+      </div>
+      <div class="mdui-collapse-item-body mdui-list mdui-list-dense">
+        
+        
+          <a href="javascript:;" class="mdui-list-item mdui-p-l-2 mdui-text-color-theme mdui-ripple" style="justify-content: center;">链接为空</a>
+        
+      </div>
+    </div>
+  </div>
+</aside>
+  <main id="main" class="mdui-m-t-5 fadeIn animated">
+                
+<link rel="stylesheet" href="https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.css">
+
+                  <style>
+                    #main article .mdui-card-content .center-block {
+                      display: block !important;
+                      margin-right: auto !important;
+                      margin-left: auto !important
+                    }
+                  </style>
+                  <article class="mdui-card mdui-m-b-5">
+                    <header class="mdui-card-media">
+                      <img
+                        src="/github.io/images/random/material-3.png"
+                        style="max-height: 240px;">
+                      <div class="mdui-card-media-covered">
+                        <div class="mdui-card-primary">
+                          <div class="mdui-card-primary-title">
+                            react相关知识
+                          </div>
+                          <div class="mdui-card-primary-subtitle"><i class="iconfont">&#xe697;</i>
+                            2021-07-15 / <i class="iconfont">&#xe601;</i>
+                              Mr Zhang
+                                
+                          </div>
+                        </div>
+                      </div>
+                      <div class="mdui-card-menu">
+                        
+                          <button class="mdui-btn mdui-btn-icon mdui-text-color-white"
+                            mdui-menu="{target: '#qrcode', align: 'right'}"><i
+                              class="mdui-icon material-icons">devices</i></button>
+                          <ul class="mdui-menu" id="qrcode">
+                            
+                              <li class="mdui-menu-item"><a class="mdui-text-center mdui-ripple">
+                                  发送到手机
+                                </a></li>
+                              
+                                <li class="mdui-menu-item" disabled>
+                                  
+                                      <img
+                                        src="http://qr.liantu.com/api.php?w=246&m=10&text=https://mishudaoshui.github.io/github.io/2021/07/15/react-zh/">
+                                      
+                                </li>
+                          </ul>
+                          
+                            
+                              <button class="mdui-btn mdui-btn-icon mdui-text-color-white"
+                                mdui-menu="{target: '#share_menu', align: 'right'}"><i
+                                  class="mdui-icon material-icons">share</i></button>
+                              <ul class="mdui-menu" id="share_menu">
+                                <li class="mdui-menu-item">
+                                  <a href="http://service.weibo.com/share/share.php?appkey=&title=react相关知识&url=https://mishudaoshui.github.io/github.io/2021/07/15/react-zh/&pic=https://mishudaoshui.github.io/github.io/github.io/images/favicon.png&searchPic=false&style=simple"
+                                    target="_blank" class="mdui-ripple">
+                                    分享到 Weibo
+                                  </a>
+                                </li>
+                                <li class="mdui-menu-item">
+                                  <a href="https://twitter.com/intent/tweet?text=react相关知识&url=https://mishudaoshui.github.io/github.io/2021/07/15/react-zh/&via=Mr Zhang"
+                                    target="_blank" class="mdui-ripple">
+                                    分享到 Twitter
+                                  </a>
+                                </li>
+                                <li class="mdui-menu-item">
+                                  <a href="https://www.facebook.com/sharer/sharer.php?u=https://mishudaoshui.github.io/github.io/2021/07/15/react-zh/"
+                                    target="_blank" class="mdui-ripple">
+                                    分享到 Facebook
+                                  </a>
+                                </li>
+                                <li class="mdui-menu-item">
+                                  <a href="https://plus.google.com/share?url=https://mishudaoshui.github.io/github.io/2021/07/15/react-zh/" target="_blank"
+                                    class="mdui-ripple">
+                                    分享到 Google+
+                                  </a>
+                                </li>
+                                <li class="mdui-menu-item">
+                                  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://mishudaoshui.github.io/github.io/2021/07/15/react-zh/&title=react相关知识"
+                                    target="_blank" class="mdui-ripple">
+                                    分享到 LinkedIn
+                                  </a>
+                                </li>
+                                <li class="mdui-menu-item">
+                                  <a href="http://connect.qq.com/widget/shareqq/index.html?site=幸福的小猪&title=react相关知识&pics=https://mishudaoshui.github.io/github.io/github.io/images/favicon.png&url=https://mishudaoshui.github.io/github.io/2021/07/15/react-zh/"
+                                    target="_blank" class="mdui-ripple">
+                                    分享到 QQ
+                                  </a>
+                                </li>
+                                <li class="mdui-menu-item">
+                                  <a href="https://telegram.me/share/url?url=https://mishudaoshui.github.io/github.io/2021/07/15/react-zh/&text=react相关知识"
+                                    target="_blank" class="mdui-ripple">
+                                    分享到 Telegram
+                                  </a>
+                                </li>
+                              </ul>
+                              
+                      </div>
+                    </header>
+                    <div class="mdui-card-content mdui-typo">
+                      <!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+<p><strong>Table of Contents</strong> <em>generated with <a target="_blank" rel="noopener" href="https://github.com/thlorenz/doctoc">DocToc</a></em></p>
+<ul>
+<li><a href="#react-%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E5%88%86%E6%9E%90">React 生命周期分析</a><ul>
+<li><a href="#v16-%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E5%87%BD%E6%95%B0%E7%94%A8%E6%B3%95%E5%BB%BA%E8%AE%AE">V16 生命周期函数用法建议</a></li>
+</ul>
+</li>
+<li><a href="#setstate">setState</a></li>
+<li><a href="#redux-%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90">Redux 源码分析</a></li>
+</ul>
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+<h1 id="React-生命周期分析"><a href="#React-生命周期分析" class="headerlink" title="React 生命周期分析"></a>React 生命周期分析</h1><p>在 V16 版本中引入了 Fiber 机制。这个机制一定程度上的影响了部分生命周期的调用，并且也引入了新的 2 个 API 来解决问题。</p>
+<p>在之前的版本中，如果你拥有一个很复杂的复合组件，然后改动了最上层组件的 <code>state</code>，那么调用栈可能会很长</p>
+<p><img src="https://yck-1254263422.cos.ap-shanghai.myqcloud.com/blog/2019-06-01-042522.png"></p>
+<p>调用栈过长，再加上中间进行了复杂的操作，就可能导致长时间阻塞主线程，带来不好的用户体验。Fiber 就是为了解决该问题而生。</p>
+<p>Fiber 本质上是一个虚拟的堆栈帧，新的调度器会按照优先级自由调度这些帧，从而将之前的同步渲染改成了异步渲染，在不影响体验的情况下去分段计算更新。</p>
+<p><img src="https://yck-1254263422.cos.ap-shanghai.myqcloud.com/blog/2019-06-01-042523.png"></p>
+<p>对于如何区别优先级，React 有自己的一套逻辑。对于动画这种实时性很高的东西，也就是 16 ms 必须渲染一次保证不卡顿的情况下，React 会每 16 ms（以内） 暂停一下更新，返回来继续渲染动画。</p>
+<p>对于异步渲染，现在渲染有两个阶段：<code>reconciliation</code> 和 <code>commit</code> 。前者过程是可以打断的，后者不能暂停，会一直更新界面直到完成。</p>
+<p><strong>Reconciliation</strong> 阶段</p>
+<ul>
+<li><code>componentWillMount</code></li>
+<li><code>componentWillReceiveProps</code></li>
+<li><code>shouldComponentUpdate</code></li>
+<li><code>componentWillUpdate</code></li>
+</ul>
+<p><strong>Commit</strong> 阶段</p>
+<ul>
+<li><code>componentDidMount</code></li>
+<li><code>componentDidUpdate</code></li>
+<li><code>componentWillUnmount</code></li>
+</ul>
+<p>因为 <code>reconciliation</code> 阶段是可以被打断的，所以 <code>reconciliation</code> 阶段会执行的生命周期函数就可能会出现调用多次的情况，从而引起 Bug。所以对于 <code>reconciliation</code> 阶段调用的几个函数，除了 <code>shouldComponentUpdate</code> 以外，其他都应该避免去使用，并且 V16 中也引入了新的 API 来解决这个问题。</p>
+<p><code>getDerivedStateFromProps</code> 用于替换 <code>componentWillReceiveProps</code> ，该函数会在初始化和 <code>update</code> 时被调用</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ExampleComponent</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</span><br><span class="line">  <span class="comment">// Initialize state in constructor,</span></span><br><span class="line">  <span class="comment">// Or with a property initializer.</span></span><br><span class="line">  state = &#123;&#125;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">static</span> <span class="function"><span class="title">getDerivedStateFromProps</span>(<span class="params">nextProps, prevState</span>)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (prevState.someMirroredValue !== nextProps.someValue) &#123;</span><br><span class="line">      <span class="keyword">return</span> &#123;</span><br><span class="line">        <span class="attr">derivedData</span>: computeDerivedState(nextProps),</span><br><span class="line">        <span class="attr">someMirroredValue</span>: nextProps.someValue,</span><br><span class="line">      &#125;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Return null to indicate no change to state.</span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>getSnapshotBeforeUpdate</code> 用于替换 <code>componentWillUpdate</code> ，该函数会在 <code>update</code> 后 DOM 更新前被调用，用于读取最新的 DOM 数据。</p>
+<h2 id="V16-生命周期函数用法建议"><a href="#V16-生命周期函数用法建议" class="headerlink" title="V16 生命周期函数用法建议"></a>V16 生命周期函数用法建议</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ExampleComponent</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</span><br><span class="line">  <span class="comment">// 用于初始化 state</span></span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params"></span>)</span> &#123;&#125;</span><br><span class="line">  <span class="comment">// 用于替换 `componentWillReceiveProps` ，该函数会在初始化和 `update` 时被调用</span></span><br><span class="line">  <span class="comment">// 因为该函数是静态函数，所以取不到 `this`</span></span><br><span class="line">  <span class="comment">// 如果需要对比 `prevProps` 需要单独在 `state` 中维护</span></span><br><span class="line">  <span class="keyword">static</span> <span class="function"><span class="title">getDerivedStateFromProps</span>(<span class="params">nextProps, prevState</span>)</span> &#123;&#125;</span><br><span class="line">  <span class="comment">// 判断是否需要更新组件，多用于组件性能优化</span></span><br><span class="line">  <span class="function"><span class="title">shouldComponentUpdate</span>(<span class="params">nextProps, nextState</span>)</span> &#123;&#125;</span><br><span class="line">  <span class="comment">// 组件挂载后调用</span></span><br><span class="line">  <span class="comment">// 可以在该函数中进行请求或者订阅</span></span><br><span class="line">  <span class="function"><span class="title">componentDidMount</span>(<span class="params"></span>)</span> &#123;&#125;</span><br><span class="line">  <span class="comment">// 用于获得最新的 DOM 数据</span></span><br><span class="line">  <span class="function"><span class="title">getSnapshotBeforeUpdate</span>(<span class="params"></span>)</span> &#123;&#125;</span><br><span class="line">  <span class="comment">// 组件即将销毁</span></span><br><span class="line">  <span class="comment">// 可以在此处移除订阅，定时器等等</span></span><br><span class="line">  <span class="function"><span class="title">componentWillUnmount</span>(<span class="params"></span>)</span> &#123;&#125;</span><br><span class="line">  <span class="comment">// 组件销毁后调用</span></span><br><span class="line">  <span class="function"><span class="title">componentDidUnMount</span>(<span class="params"></span>)</span> &#123;&#125;</span><br><span class="line">  <span class="comment">// 组件更新后调用</span></span><br><span class="line">  <span class="function"><span class="title">componentDidUpdate</span>(<span class="params"></span>)</span> &#123;&#125;</span><br><span class="line">  <span class="comment">// 渲染组件函数</span></span><br><span class="line">  <span class="function"><span class="title">render</span>(<span class="params"></span>)</span> &#123;&#125;</span><br><span class="line">  <span class="comment">// 以下函数不建议使用</span></span><br><span class="line">  <span class="function"><span class="title">UNSAFE_componentWillMount</span>(<span class="params"></span>)</span> &#123;&#125;</span><br><span class="line">  <span class="function"><span class="title">UNSAFE_componentWillUpdate</span>(<span class="params">nextProps, nextState</span>)</span> &#123;&#125;</span><br><span class="line">  <span class="function"><span class="title">UNSAFE_componentWillReceiveProps</span>(<span class="params">nextProps</span>)</span> &#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="setState"><a href="#setState" class="headerlink" title="setState"></a>setState</h1><p><code>setState</code> 在 React 中是经常使用的一个 API，但是它存在一些问题，可能会导致犯错，核心原因就是因为这个 API 是异步的。</p>
+<p>首先 <code>setState</code> 的调用并不会马上引起 <code>state</code> 的改变，并且如果你一次调用了多个 <code>setState</code> ，那么结果可能并不如你期待的一样。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">handle</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">  <span class="comment">// 初始化 `count` 为 0</span></span><br><span class="line">  <span class="built_in">console</span>.log(<span class="built_in">this</span>.state.count) <span class="comment">// -&gt; 0</span></span><br><span class="line">  <span class="built_in">this</span>.setState(&#123; <span class="attr">count</span>: <span class="built_in">this</span>.state.count + <span class="number">1</span> &#125;)</span><br><span class="line">  <span class="built_in">this</span>.setState(&#123; <span class="attr">count</span>: <span class="built_in">this</span>.state.count + <span class="number">1</span> &#125;)</span><br><span class="line">  <span class="built_in">this</span>.setState(&#123; <span class="attr">count</span>: <span class="built_in">this</span>.state.count + <span class="number">1</span> &#125;)</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="built_in">this</span>.state.count) <span class="comment">// -&gt; 0</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>第一，两次的打印都为 0，因为 <code>setState</code> 是个异步 API，只有同步代码运行完毕才会执行。<code>setState</code> 异步的原因我认为在于，<code>setState</code> 可能会导致 DOM 的重绘，如果调用一次就马上去进行重绘，那么调用多次就会造成不必要的性能损失。设计成异步的话，就可以将多次调用放入一个队列中，在恰当的时候统一进行更新过程。</p>
+<p>第二，虽然调用了三次 <code>setState</code> ，但是 <code>count</code> 的值还是为 1。因为多次调用会合并为一次，只有当更新结束后 <code>state</code> 才会改变，三次调用等同于如下代码</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span>.assign(</span><br><span class="line">  &#123;&#125;,</span><br><span class="line">  &#123; <span class="attr">count</span>: <span class="built_in">this</span>.state.count + <span class="number">1</span> &#125;,</span><br><span class="line">  &#123; <span class="attr">count</span>: <span class="built_in">this</span>.state.count + <span class="number">1</span> &#125;,</span><br><span class="line">  &#123; <span class="attr">count</span>: <span class="built_in">this</span>.state.count + <span class="number">1</span> &#125;</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<p>当然你也可以通过以下方式来实现调用三次 <code>setState</code> 使得 <code>count</code> 为 3</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">handle</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">  <span class="built_in">this</span>.setState(<span class="function">(<span class="params">prevState</span>) =&gt;</span> (&#123; <span class="attr">count</span>: prevState.count + <span class="number">1</span> &#125;))</span><br><span class="line">  <span class="built_in">this</span>.setState(<span class="function">(<span class="params">prevState</span>) =&gt;</span> (&#123; <span class="attr">count</span>: prevState.count + <span class="number">1</span> &#125;))</span><br><span class="line">  <span class="built_in">this</span>.setState(<span class="function">(<span class="params">prevState</span>) =&gt;</span> (&#123; <span class="attr">count</span>: prevState.count + <span class="number">1</span> &#125;))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果你想在每次调用 <code>setState</code> 后获得正确的 <code>state</code> ，可以通过如下代码实现</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">handle</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.setState(<span class="function">(<span class="params">prevState</span>) =&gt;</span> (&#123; <span class="attr">count</span>: prevState.count + <span class="number">1</span> &#125;), <span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="built_in">this</span>.state)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="Redux-源码分析"><a href="#Redux-源码分析" class="headerlink" title="Redux 源码分析"></a>Redux 源码分析</h1><p>首先让我们来看下 <code>combineReducers</code> 函数</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 传入一个 object</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span> <span class="title">combineReducers</span>(<span class="params">reducers</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 获取该 Object 的 key 值</span></span><br><span class="line">  <span class="keyword">const</span> reducerKeys = <span class="built_in">Object</span>.keys(reducers);</span><br><span class="line">  <span class="comment">// 过滤后的 reducers</span></span><br><span class="line">  <span class="keyword">const</span> finalReducers = &#123;&#125;;</span><br><span class="line">  <span class="comment">// 获取每一个 key 对应的 value</span></span><br><span class="line">  <span class="comment">// 在开发环境下判断值是否为 undefined</span></span><br><span class="line">  <span class="comment">// 然后将值类型是函数的值放入 finalReducers</span></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; reducerKeys.length; i++) &#123;</span><br><span class="line">    <span class="keyword">const</span> key = reducerKeys[i];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (process.env.NODE_ENV !== <span class="string">&quot;production&quot;</span>) &#123;</span><br><span class="line">      <span class="keyword">if</span> (<span class="keyword">typeof</span> reducers[key] === <span class="string">&quot;undefined&quot;</span>) &#123;</span><br><span class="line">        warning(<span class="string">`No reducer provided for key &quot;<span class="subst">$&#123;key&#125;</span>&quot;`</span>);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> reducers[key] === <span class="string">&quot;function&quot;</span>) &#123;</span><br><span class="line">      finalReducers[key] = reducers[key];</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 拿到过滤后的 reducers 的 key 值</span></span><br><span class="line">  <span class="keyword">const</span> finalReducerKeys = <span class="built_in">Object</span>.keys(finalReducers);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 在开发环境下判断，保存不期望 key 的缓存用以下面做警告</span></span><br><span class="line">  <span class="keyword">let</span> unexpectedKeyCache;</span><br><span class="line">  <span class="keyword">if</span> (process.env.NODE_ENV !== <span class="string">&quot;production&quot;</span>) &#123;</span><br><span class="line">    unexpectedKeyCache = &#123;&#125;;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">let</span> shapeAssertionError;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="comment">// 该函数解析在下面</span></span><br><span class="line">    assertReducerShape(finalReducers);</span><br><span class="line">  &#125; <span class="keyword">catch</span> (e) &#123;</span><br><span class="line">    shapeAssertionError = e;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// combineReducers 函数返回一个函数，也就是合并后的 reducer 函数</span></span><br><span class="line">  <span class="comment">// 该函数返回总的 state</span></span><br><span class="line">  <span class="comment">// 并且你也可以发现这里使用了闭包，函数里面使用到了外面的一些属性</span></span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> <span class="title">combination</span>(<span class="params">state = &#123;&#125;, action</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (shapeAssertionError) &#123;</span><br><span class="line">      <span class="keyword">throw</span> shapeAssertionError;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 该函数解析在下面</span></span><br><span class="line">    <span class="keyword">if</span> (process.env.NODE_ENV !== <span class="string">&quot;production&quot;</span>) &#123;</span><br><span class="line">      <span class="keyword">const</span> warningMessage = getUnexpectedStateShapeWarningMessage(</span><br><span class="line">        state,</span><br><span class="line">        finalReducers,</span><br><span class="line">        action,</span><br><span class="line">        unexpectedKeyCache</span><br><span class="line">      );</span><br><span class="line">      <span class="keyword">if</span> (warningMessage) &#123;</span><br><span class="line">        warning(warningMessage);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// state 是否改变</span></span><br><span class="line">    <span class="keyword">let</span> hasChanged = <span class="literal">false</span>;</span><br><span class="line">    <span class="comment">// 改变后的 state</span></span><br><span class="line">    <span class="keyword">const</span> nextState = &#123;&#125;;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; finalReducerKeys.length; i++) &#123;</span><br><span class="line">      <span class="comment">// 拿到相应的 key</span></span><br><span class="line">      <span class="keyword">const</span> key = finalReducerKeys[i];</span><br><span class="line">      <span class="comment">// 获得 key 对应的 reducer 函数</span></span><br><span class="line">      <span class="keyword">const</span> reducer = finalReducers[key];</span><br><span class="line">      <span class="comment">// state 树下的 key 是与 finalReducers 下的 key 相同的</span></span><br><span class="line">      <span class="comment">// 所以你在 combineReducers 中传入的参数的 key 即代表了 各个 reducer 也代表了各个 state</span></span><br><span class="line">      <span class="keyword">const</span> previousStateForKey = state[key];</span><br><span class="line">      <span class="comment">// 然后执行 reducer 函数获得该 key 值对应的 state</span></span><br><span class="line">      <span class="keyword">const</span> nextStateForKey = reducer(previousStateForKey, action);</span><br><span class="line">      <span class="comment">// 判断 state 的值，undefined 的话就报错</span></span><br><span class="line">      <span class="keyword">if</span> (<span class="keyword">typeof</span> nextStateForKey === <span class="string">&quot;undefined&quot;</span>) &#123;</span><br><span class="line">        <span class="keyword">const</span> errorMessage = getUndefinedStateErrorMessage(key, action);</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(errorMessage);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="comment">// 然后将 value 塞进去</span></span><br><span class="line">      nextState[key] = nextStateForKey;</span><br><span class="line">      <span class="comment">// 如果 state 改变</span></span><br><span class="line">      hasChanged = hasChanged || nextStateForKey !== previousStateForKey;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// state 只要改变过，就返回新的 state</span></span><br><span class="line">    <span class="keyword">return</span> hasChanged ? nextState : state;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>combineReducers</code> 函数总的来说很简单，总结来说就是接收一个对象，将参数过滤后返回一个函数。该函数里有一个过滤参数后的对象 finalReducers，遍历该对象，然后执行对象中的每一个 reducer 函数，最后将新的 state 返回。</p>
+<p>接下来让我们来看看 combinrReducers 中用到的两个函数</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 这是执行的第一个用于抛错的函数</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">assertReducerShape</span>(<span class="params">reducers</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 将 combineReducers 中的参数遍历</span></span><br><span class="line">  <span class="built_in">Object</span>.keys(reducers).forEach(<span class="function">(<span class="params">key</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> reducer = reducers[key];</span><br><span class="line">    <span class="comment">// 给他传入一个 action</span></span><br><span class="line">    <span class="keyword">const</span> initialState = reducer(<span class="literal">undefined</span>, &#123; <span class="attr">type</span>: ActionTypes.INIT &#125;);</span><br><span class="line">    <span class="comment">// 如果得到的 state 为 undefined 就抛错</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> initialState === <span class="string">&quot;undefined&quot;</span>) &#123;</span><br><span class="line">      <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(</span><br><span class="line">        <span class="string">`Reducer &quot;<span class="subst">$&#123;key&#125;</span>&quot; returned undefined during initialization. `</span> +</span><br><span class="line">          <span class="string">`If the state passed to the reducer is undefined, you must `</span> +</span><br><span class="line">          <span class="string">`explicitly return the initial state. The initial state may `</span> +</span><br><span class="line">          <span class="string">`not be undefined. If you don&#x27;t want to set a value for this reducer, `</span> +</span><br><span class="line">          <span class="string">`you can use null instead of undefined.`</span></span><br><span class="line">      );</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 再过滤一次，考虑到万一你在 reducer 中给 ActionTypes.INIT 返回了值</span></span><br><span class="line">    <span class="comment">// 传入一个随机的 action 判断值是否为 undefined</span></span><br><span class="line">    <span class="keyword">const</span> type =</span><br><span class="line">      <span class="string">&quot;@@redux/PROBE_UNKNOWN_ACTION_&quot;</span> +</span><br><span class="line">      <span class="built_in">Math</span>.random().toString(<span class="number">36</span>).substring(<span class="number">7</span>).split(<span class="string">&quot;&quot;</span>).join(<span class="string">&quot;.&quot;</span>);</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> reducer(<span class="literal">undefined</span>, &#123; type &#125;) === <span class="string">&quot;undefined&quot;</span>) &#123;</span><br><span class="line">      <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(</span><br><span class="line">        <span class="string">`Reducer &quot;<span class="subst">$&#123;key&#125;</span>&quot; returned undefined when probed with a random type. `</span> +</span><br><span class="line">          <span class="string">`Don&#x27;t try to handle <span class="subst">$&#123;ActionTypes.INIT&#125;</span> or other actions in &quot;redux/*&quot; `</span> +</span><br><span class="line">          <span class="string">`namespace. They are considered private. Instead, you must return the `</span> +</span><br><span class="line">          <span class="string">`current state for any unknown actions, unless it is undefined, `</span> +</span><br><span class="line">          <span class="string">`in which case you must return the initial state, regardless of the `</span> +</span><br><span class="line">          <span class="string">`action type. The initial state may not be undefined, but can be null.`</span></span><br><span class="line">      );</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getUnexpectedStateShapeWarningMessage</span>(<span class="params"></span></span></span><br><span class="line"><span class="params"><span class="function">  inputState,</span></span></span><br><span class="line"><span class="params"><span class="function">  reducers,</span></span></span><br><span class="line"><span class="params"><span class="function">  action,</span></span></span><br><span class="line"><span class="params"><span class="function">  unexpectedKeyCache</span></span></span><br><span class="line"><span class="params"><span class="function"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 这里的 reducers 已经是 finalReducers</span></span><br><span class="line">  <span class="keyword">const</span> reducerKeys = <span class="built_in">Object</span>.keys(reducers);</span><br><span class="line">  <span class="keyword">const</span> argumentName =</span><br><span class="line">    action &amp;&amp; action.type === ActionTypes.INIT</span><br><span class="line">      ? <span class="string">&quot;preloadedState argument passed to createStore&quot;</span></span><br><span class="line">      : <span class="string">&quot;previous state received by the reducer&quot;</span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 如果 finalReducers 为空</span></span><br><span class="line">  <span class="keyword">if</span> (reducerKeys.length === <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      <span class="string">&quot;Store does not have a valid reducer. Make sure the argument passed &quot;</span> +</span><br><span class="line">      <span class="string">&quot;to combineReducers is an object whose values are reducers.&quot;</span></span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 如果你传入的 state 不是对象</span></span><br><span class="line">  <span class="keyword">if</span> (!isPlainObject(inputState)) &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      <span class="string">`The <span class="subst">$&#123;argumentName&#125;</span> has unexpected type of &quot;`</span> +</span><br><span class="line">      &#123;&#125;.toString.call(inputState).match(<span class="regexp">/\s([a-z|A-Z]+)/</span>)[<span class="number">1</span>] +</span><br><span class="line">      <span class="string">`&quot;. Expected argument to be an object with the following `</span> +</span><br><span class="line">      <span class="string">`keys: &quot;<span class="subst">$&#123;reducerKeys.join(<span class="string">&#x27;&quot;, &quot;&#x27;</span>)&#125;</span>&quot;`</span></span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 将参入的 state 于 finalReducers 下的 key 做比较，过滤出多余的 key</span></span><br><span class="line">  <span class="keyword">const</span> unexpectedKeys = <span class="built_in">Object</span>.keys(inputState).filter(</span><br><span class="line">    <span class="function">(<span class="params">key</span>) =&gt;</span> !reducers.hasOwnProperty(key) &amp;&amp; !unexpectedKeyCache[key]</span><br><span class="line">  );</span><br><span class="line"></span><br><span class="line">  unexpectedKeys.forEach(<span class="function">(<span class="params">key</span>) =&gt;</span> &#123;</span><br><span class="line">    unexpectedKeyCache[key] = <span class="literal">true</span>;</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (action &amp;&amp; action.type === ActionTypes.REPLACE) <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 如果 unexpectedKeys 有值的话</span></span><br><span class="line">  <span class="keyword">if</span> (unexpectedKeys.length &gt; <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      <span class="string">`Unexpected <span class="subst">$&#123;unexpectedKeys.length &gt; <span class="number">1</span> ? <span class="string">&quot;keys&quot;</span> : <span class="string">&quot;key&quot;</span>&#125;</span> `</span> +</span><br><span class="line">      <span class="string">`&quot;<span class="subst">$&#123;unexpectedKeys.join(<span class="string">&#x27;&quot;, &quot;&#x27;</span>)&#125;</span>&quot; found in <span class="subst">$&#123;argumentName&#125;</span>. `</span> +</span><br><span class="line">      <span class="string">`Expected to find one of the known reducer keys instead: `</span> +</span><br><span class="line">      <span class="string">`&quot;<span class="subst">$&#123;reducerKeys.join(<span class="string">&#x27;&quot;, &quot;&#x27;</span>)&#125;</span>&quot;. Unexpected keys will be ignored.`</span></span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>接下来让我们先来看看 <code>compose</code> 函数</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 这个函数设计的很巧妙，通过传入函数引用的方式让我们完成多个函数的嵌套使用，术语叫做高阶函数</span></span><br><span class="line"><span class="comment">// 通过使用 reduce 函数做到从右至左调用函数</span></span><br><span class="line"><span class="comment">// 对于上面项目中的例子</span></span><br><span class="line">compose(</span><br><span class="line">  applyMiddleware(thunkMiddleware),</span><br><span class="line">  <span class="built_in">window</span>.devToolsExtension ? <span class="built_in">window</span>.devToolsExtension() : <span class="function">(<span class="params">f</span>) =&gt;</span> f</span><br><span class="line">);</span><br><span class="line"><span class="comment">// 经过 compose 函数变成了 applyMiddleware(thunkMiddleware)(window.devToolsExtension()())</span></span><br><span class="line"><span class="comment">// 所以在找不到 window.devToolsExtension 时你应该返回一个函数</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span> <span class="title">compose</span>(<span class="params">...funcs</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (funcs.length === <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="function">(<span class="params">arg</span>) =&gt;</span> arg;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (funcs.length === <span class="number">1</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> funcs[<span class="number">0</span>];</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> funcs.reduce(</span><br><span class="line">    <span class="function">(<span class="params">a, b</span>) =&gt;</span></span><br><span class="line">      <span class="function">(<span class="params">...args</span>) =&gt;</span></span><br><span class="line">        a(b(...args))</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后我们来解析 <code>createStore</code> 函数的部分代码</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span> <span class="title">createStore</span>(<span class="params">reducer, preloadedState, enhancer</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 一般 preloadedState 用的少，判断类型，如果第二个参数是函数且没有第三个参数，就调换位置</span></span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> preloadedState === <span class="string">&quot;function&quot;</span> &amp;&amp; <span class="keyword">typeof</span> enhancer === <span class="string">&quot;undefined&quot;</span>) &#123;</span><br><span class="line">    enhancer = preloadedState;</span><br><span class="line">    preloadedState = <span class="literal">undefined</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 判断 enhancer 是否是函数</span></span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> enhancer !== <span class="string">&quot;undefined&quot;</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> enhancer !== <span class="string">&quot;function&quot;</span>) &#123;</span><br><span class="line">      <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">&quot;Expected the enhancer to be a function.&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 类型没错的话，先执行 enhancer，然后再执行 createStore 函数</span></span><br><span class="line">    <span class="keyword">return</span> enhancer(createStore)(reducer, preloadedState);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 判断 reducer 是否是函数</span></span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> reducer !== <span class="string">&quot;function&quot;</span>) &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">&quot;Expected the reducer to be a function.&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 当前 reducer</span></span><br><span class="line">  <span class="keyword">let</span> currentReducer = reducer;</span><br><span class="line">  <span class="comment">// 当前状态</span></span><br><span class="line">  <span class="keyword">let</span> currentState = preloadedState;</span><br><span class="line">  <span class="comment">// 当前监听函数数组</span></span><br><span class="line">  <span class="keyword">let</span> currentListeners = [];</span><br><span class="line">  <span class="comment">// 这是一个很重要的设计，为的就是每次在遍历监听器的时候保证 currentListeners 数组不变</span></span><br><span class="line">  <span class="comment">// 可以考虑下只存在 currentListeners 的情况，如果我在某个 subscribe 中再次执行 subscribe</span></span><br><span class="line">  <span class="comment">// 或者 unsubscribe，这样会导致当前的 currentListeners 数组大小发生改变，从而可能导致</span></span><br><span class="line">  <span class="comment">// 索引出错</span></span><br><span class="line">  <span class="keyword">let</span> nextListeners = currentListeners;</span><br><span class="line">  <span class="comment">// reducer 是否正在执行</span></span><br><span class="line">  <span class="keyword">let</span> isDispatching = <span class="literal">false</span>;</span><br><span class="line">  <span class="comment">// 如果 currentListeners 和 nextListeners 相同，就赋值回去</span></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">ensureCanMutateNextListeners</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (nextListeners === currentListeners) &#123;</span><br><span class="line">      nextListeners = currentListeners.slice();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// ......</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>接下来先来介绍 <code>applyMiddleware</code> 函数</p>
+<p>在这之前我需要先来介绍一下函数柯里化，柯里化是一种将使用多个参数的一个函数转换成一系列使用一个参数的函数的技术。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params">a,b</span>) </span>&#123; <span class="keyword">return</span> a + b &#125;</span><br><span class="line">add(<span class="number">1</span>, <span class="number">2</span>) =&gt; <span class="number">3</span></span><br><span class="line"><span class="comment">// 对于以上函数如果使用柯里化可以这样改造</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params">a</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="params">b</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> a + b</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">add(<span class="number">1</span>)(<span class="number">2</span>) =&gt; <span class="number">3</span></span><br><span class="line"><span class="comment">// 你可以这样理解函数柯里化，通过闭包保存了外部的一个变量，然后返回一个接收参数的函数，在该函数中使用了保存的变量，然后再返回值。</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 这个函数应该是整个源码中最难理解的一块了</span></span><br><span class="line"><span class="comment">// 该函数返回一个柯里化的函数</span></span><br><span class="line"><span class="comment">// 所以调用这个函数应该这样写 applyMiddleware(...middlewares)(createStore)(...args)</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span> <span class="title">applyMiddleware</span>(<span class="params">...middlewares</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="params">createStore</span> =&gt;</span> <span class="function">(<span class="params">...args</span>) =&gt;</span> &#123;</span><br><span class="line">   <span class="comment">// 这里执行 createStore 函数，把 applyMiddleware 函数最后次调用的参数传进来</span></span><br><span class="line">    <span class="keyword">const</span> store = createStore(...args)</span><br><span class="line">    <span class="keyword">let</span> dispatch = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(</span><br><span class="line">        <span class="string">`Dispatching while constructing your middleware is not allowed. `</span> +</span><br><span class="line">          <span class="string">`Other middleware would not be applied to this dispatch.`</span></span><br><span class="line">      )</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">let</span> chain = []</span><br><span class="line">    <span class="comment">// 每个中间件都应该有这两个函数</span></span><br><span class="line">    <span class="keyword">const</span> middlewareAPI = &#123;</span><br><span class="line">      <span class="attr">getState</span>: store.getState,</span><br><span class="line">      <span class="attr">dispatch</span>: <span class="function">(<span class="params">...args</span>) =&gt;</span> dispatch(...args)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 把 middlewares 中的每个中间件都传入 middlewareAPI</span></span><br><span class="line">    chain = middlewares.map(<span class="function"><span class="params">middleware</span> =&gt;</span> middleware(middlewareAPI))</span><br><span class="line">    <span class="comment">// 和之前一样，从右至左调用每个中间件，然后传入 store.dispatch</span></span><br><span class="line">    dispatch = compose(...chain)(store.dispatch)</span><br><span class="line">    <span class="comment">// 这里只看这部分代码有点抽象，我这里放入 redux-thunk 的代码来结合分析</span></span><br><span class="line">    <span class="comment">// createThunkMiddleware返回了3层函数，第一层函数接收 middlewareAPI 参数</span></span><br><span class="line">    <span class="comment">// 第二次函数接收 store.dispatch</span></span><br><span class="line">    <span class="comment">// 第三层函数接收 dispatch 中的参数</span></span><br><span class="line">&#123;<span class="function"><span class="keyword">function</span> <span class="title">createThunkMiddleware</span>(<span class="params">extraArgument</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="function">(<span class="params">&#123; dispatch, getState &#125;</span>) =&gt;</span> <span class="function"><span class="params">next</span> =&gt;</span> <span class="function"><span class="params">action</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// 判断 dispatch 中的参数是否为函数</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> action === <span class="string">&#x27;function&#x27;</span>) &#123;</span><br><span class="line">    <span class="comment">// 是函数的话再把这些参数传进去，直到 action 不为函数，执行 dispatch(&#123;tyep: &#x27;XXX&#x27;&#125;)</span></span><br><span class="line">      <span class="keyword">return</span> action(dispatch, getState, extraArgument);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> next(action);</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> thunk = createThunkMiddleware();</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> thunk;&#125;</span><br><span class="line"><span class="comment">// 最后把经过中间件加强后的 dispatch 于剩余 store 中的属性返回，这样你的 dispatch</span></span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      ...store,</span><br><span class="line">      dispatch</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>好了，我们现在将困难的部分都攻克了，来看一些简单的代码</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 这个没啥好说的，就是把当前的 state 返回，但是当正在执行 reducer 时不能执行该方法</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getState</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (isDispatching) &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(</span><br><span class="line">      <span class="string">&quot;You may not call store.getState() while the reducer is executing. &quot;</span> +</span><br><span class="line">        <span class="string">&quot;The reducer has already received the state as an argument. &quot;</span> +</span><br><span class="line">        <span class="string">&quot;Pass it down from the top reducer instead of reading it from the store.&quot;</span></span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> currentState;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 接收一个函数参数</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">subscribe</span>(<span class="params">listener</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> listener !== <span class="string">&quot;function&quot;</span>) &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">&quot;Expected listener to be a function.&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 这部分最主要的设计 nextListeners 已经讲过，其他基本没什么好说的</span></span><br><span class="line">  <span class="keyword">if</span> (isDispatching) &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(</span><br><span class="line">      <span class="string">&quot;You may not call store.subscribe() while the reducer is executing. &quot;</span> +</span><br><span class="line">        <span class="string">&quot;If you would like to be notified after the store has been updated, subscribe from a &quot;</span> +</span><br><span class="line">        <span class="string">&quot;component and invoke store.getState() in the callback to access the latest state. &quot;</span> +</span><br><span class="line">        <span class="string">&quot;See http://redux.js.org/docs/api/Store.html#subscribe for more details.&quot;</span></span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">let</span> isSubscribed = <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">  ensureCanMutateNextListeners();</span><br><span class="line">  nextListeners.push(listener);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 返回一个取消订阅函数</span></span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> <span class="title">unsubscribe</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!isSubscribed) &#123;</span><br><span class="line">      <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (isDispatching) &#123;</span><br><span class="line">      <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(</span><br><span class="line">        <span class="string">&quot;You may not unsubscribe from a store listener while the reducer is executing. &quot;</span> +</span><br><span class="line">          <span class="string">&quot;See http://redux.js.org/docs/api/Store.html#subscribe for more details.&quot;</span></span><br><span class="line">      );</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    isSubscribed = <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">    ensureCanMutateNextListeners();</span><br><span class="line">    <span class="keyword">const</span> index = nextListeners.indexOf(listener);</span><br><span class="line">    nextListeners.splice(index, <span class="number">1</span>);</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">dispatch</span>(<span class="params">action</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 原生的 dispatch 会判断 action 是否为对象</span></span><br><span class="line">  <span class="keyword">if</span> (!isPlainObject(action)) &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(</span><br><span class="line">      <span class="string">&quot;Actions must be plain objects. &quot;</span> +</span><br><span class="line">        <span class="string">&quot;Use custom middleware for async actions.&quot;</span></span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> action.type === <span class="string">&quot;undefined&quot;</span>) &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(</span><br><span class="line">      <span class="string">&#x27;Actions may not have an undefined &quot;type&quot; property. &#x27;</span> +</span><br><span class="line">        <span class="string">&quot;Have you misspelled a constant?&quot;</span></span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 注意在 Reducers 中是不能执行 dispatch 函数的</span></span><br><span class="line">  <span class="comment">// 因为你一旦在 reducer 函数中执行 dispatch，会引发死循环</span></span><br><span class="line">  <span class="keyword">if</span> (isDispatching) &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">&quot;Reducers may not dispatch actions.&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 执行 combineReducers 组合后的函数</span></span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    isDispatching = <span class="literal">true</span>;</span><br><span class="line">    currentState = currentReducer(currentState, action);</span><br><span class="line">  &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">    isDispatching = <span class="literal">false</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 然后遍历 currentListeners，执行数组中保存的函数</span></span><br><span class="line">  <span class="keyword">const</span> listeners = (currentListeners = nextListeners);</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; listeners.length; i++) &#123;</span><br><span class="line">    <span class="keyword">const</span> listener = listeners[i];</span><br><span class="line">    listener();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> action;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 然后在 createStore 末尾会发起一个 action dispatch(&#123; type: ActionTypes.INIT &#125;);</span></span><br><span class="line"><span class="comment">// 用以初始化 state</span></span><br></pre></td></tr></table></figure>
+
+                        
+                            <blockquote>
+                              
+                                    <strong>
+                                      本文链接：
+                                    </strong><br><a href="https://mishudaoshui.github.io/github.io/2021/07/15/react-zh/">
+                                      https://mishudaoshui.github.io/github.io/2021/07/15/react-zh/
+                                    </a>
+                            </blockquote>
+                    </div>
+                    <footer class="mdui-card-actions">
+                      
+                            
+                    </footer>
+                    
+                  </article>
+                  
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+
+                    <script>$("#main article .mdui-card-content img.fancybox").on("click", function (e) { $.fancybox.open({ src: $(this).attr("src") }); });</script>
+                    
+                      
+                        <nav id="paginator">
+                          
+                            <a rel="prev" class="extend prev" href="/github.io/2021/07/15/vue-zh/">
+                              <button aria-label="prev"
+                                class="mdui-btn mdui-btn-raised mdui-btn-icon mdui-color-theme-accent mdui-ripple"><i
+                                  class="mdui-icon material-icons">arrow_back</i></button>
+                              <span class="mdui-p-x-3" mdui-tooltip="{content: 'vue相关知识'}">
+                                上一篇
+                              </span>
+                            </a>
+                            
+                              <div class="spacer"></div>
+                              
+                                <a rel="next" class="extend next" href="/github.io/2021/07/15/framework-zh/">
+                                  <span class="mdui-p-x-3" mdui-tooltip="{content: '虚拟DOM'}">
+                                    下一篇
+                                  </span>
+                                  <button aria-label="next"
+                                    class="mdui-btn mdui-btn-raised mdui-btn-icon mdui-color-theme-accent mdui-ripple"><i
+                                      class="mdui-icon material-icons">arrow_forward</i></button>
+                                </a>
+                                
+                        </nav>
+                        
+                          
+                              
+                                </main>
+  <footer id="footer" class="mdui-m-t-5 mdui-p-y-3 mdui-color-theme">
+  <div class="mdui-p-y-0 mdui-text-center">
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  </div>
+  <div class="mdui-p-y-1 mdui-text-center">
+    Copyright &copy; 2021 Mr Zhang<br>
+    Powered by <a href="https://hexo.io/" target="_blank" class="mdui-text-color-theme-accent">Hexo</a>
+    
+  </div>
+</footer>
+  <button id="gotop" class="mdui-fab mdui-fab-fixed mdui-fab-hide mdui-color-theme-accent mdui-ripple"><i class="mdui-icon material-icons">arrow_upward</i></button>
+  
+  
+<script src="/github.io/js/mdui.js"></script>
+<script src="/github.io/js/script.js"></script>
+
+  
+<script src="/github.io/custom.js"></script>
+
+</body>
+</html>
