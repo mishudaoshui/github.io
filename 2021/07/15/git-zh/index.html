@@ -8,21 +8,25 @@
   <meta name="renderer" content="webkit">
 
   
-  <title>项目创建说明 | 幸福的小猪</title>
+  <title>git知识 | 幸福的小猪</title>
 
   <link rel="shortcut icon" href="/images/favicon.png">
   <link rel="alternate" href="/atom.xml" title="幸福的小猪" type="application/atom+xml">
-  <meta name="description" content="欢迎光临[Hexo] (https:&#x2F;&#x2F;hexo.io&#x2F;) !这是你的第一个帖子。查看文档获取更多信息。如果你在使用 Hexo 时有任何问题，你可以在疑难解答中找到答案，或者你可以在GitHub上问我。 快速启动创建一个新帖子1$ hexo new &quot;My New Post&quot;  更多信息: Writing 运行服务器1$ hexo server  更多信息: Server 生成">
+  <meta name="description" content="Table of Contents generated with DocToc  Rebase 合并 stash reflog Reset    本文不会介绍 Git 的基本操作，会对一些高级操作进行说明。 Rebase 合并该命令可以让和 merge 命令得到的结果基本是一致的。 通常使用 merge 操作将分支上的代码合并到 master 中，分支样子如下所示  使用 rebase 后，">
 <meta property="og:type" content="article">
-<meta property="og:title" content="项目创建说明">
-<meta property="og:url" content="http://example.com/2021/07/13/hello-world/index.html">
+<meta property="og:title" content="git知识">
+<meta property="og:url" content="http://example.com/2021/07/15/git-zh/index.html">
 <meta property="og:site_name" content="幸福的小猪">
-<meta property="og:description" content="欢迎光临[Hexo] (https:&#x2F;&#x2F;hexo.io&#x2F;) !这是你的第一个帖子。查看文档获取更多信息。如果你在使用 Hexo 时有任何问题，你可以在疑难解答中找到答案，或者你可以在GitHub上问我。 快速启动创建一个新帖子1$ hexo new &quot;My New Post&quot;  更多信息: Writing 运行服务器1$ hexo server  更多信息: Server 生成">
+<meta property="og:description" content="Table of Contents generated with DocToc  Rebase 合并 stash reflog Reset    本文不会介绍 Git 的基本操作，会对一些高级操作进行说明。 Rebase 合并该命令可以让和 merge 命令得到的结果基本是一致的。 通常使用 merge 操作将分支上的代码合并到 master 中，分支样子如下所示  使用 rebase 后，">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-07-13T01:09:22.266Z">
-<meta property="article:modified_time" content="2021-07-13T23:58:17.974Z">
+<meta property="og:image" content="http://example.com/images/2019-06-01-043128.png">
+<meta property="og:image" content="http://example.com/images/2019-06-01-043129.png">
+<meta property="og:image" content="http://example.com/images/2019-06-01-43130.png">
+<meta property="article:published_time" content="2021-07-15T03:54:17.000Z">
+<meta property="article:modified_time" content="2021-07-15T06:27:39.724Z">
 <meta property="article:author" content="Mr Zhang">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images/2019-06-01-043128.png">
 
   <meta name="keywords" content="">
   <meta name="format-detection" content="telephone=no,email=no">
@@ -30,7 +34,7 @@
 
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="application-name" content="幸福的小猪">
-  <meta name="msapplication-starturl" content="http://example.com/2021/07/13/hello-world/">
+  <meta name="msapplication-starturl" content="http://example.com/2021/07/15/git-zh/">
   <meta name="msapplication-navbutton-color" content="#9C27B0">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-title" content="幸福的小猪">
@@ -38,7 +42,7 @@
   <link rel="apple-touch-icon" href="/images/favicon.png">
 
   
-    <link rel="canonical" href="http://example.com/2021/07/13/hello-world/">
+    <link rel="canonical" href="http://example.com/2021/07/15/git-zh/">
   
 
   
@@ -175,11 +179,11 @@
   <style>#main article .mdui-card-content .center-block{display:block!important;margin-right:auto!important;margin-left:auto!important}</style>
   <article class="mdui-card mdui-m-b-5">
     <header class="mdui-card-media">
-      <img src="/images/random/material-4.png" style="max-height: 240px;">
+      <img src="/images/random/material-15.png" style="max-height: 240px;">
       <div class="mdui-card-media-covered">
         <div class="mdui-card-primary">
-          <div class="mdui-card-primary-title">项目创建说明</div>
-          <div class="mdui-card-primary-subtitle"><i class="iconfont">&#xe697;</i> 2021-07-13 / <i class="iconfont">&#xe601;</i> Mr Zhang</div>
+          <div class="mdui-card-primary-title">git知识</div>
+          <div class="mdui-card-primary-subtitle"><i class="iconfont">&#xe697;</i> 2021-07-15 / <i class="iconfont">&#xe601;</i> Mr Zhang</div>
         </div>
       </div>
       <div class="mdui-card-menu">
@@ -191,7 +195,7 @@
             
             <li class="mdui-menu-item" disabled>
               
-                <img src="http://qr.liantu.com/api.php?w=246&m=10&text=http://example.com/2021/07/13/hello-world/">
+                <img src="http://qr.liantu.com/api.php?w=246&m=10&text=http://example.com/2021/07/15/git-zh/">
               
             </li>
           </ul>
@@ -200,49 +204,75 @@
           <button class="mdui-btn mdui-btn-icon mdui-text-color-white" mdui-menu="{target: '#share_menu', align: 'right'}"><i class="mdui-icon material-icons">share</i></button>
           <ul class="mdui-menu" id="share_menu">
             <li class="mdui-menu-item">
-              <a href="http://service.weibo.com/share/share.php?appkey=&title=项目创建说明&url=http://example.com/2021/07/13/hello-world/&pic=http://example.com/images/favicon.png&searchPic=false&style=simple" target="_blank" class="mdui-ripple">分享到 Weibo</a>
+              <a href="http://service.weibo.com/share/share.php?appkey=&title=git知识&url=http://example.com/2021/07/15/git-zh/&pic=http://example.com/images/favicon.png&searchPic=false&style=simple" target="_blank" class="mdui-ripple">分享到 Weibo</a>
             </li>
             <li class="mdui-menu-item">
-              <a href="https://twitter.com/intent/tweet?text=项目创建说明&url=http://example.com/2021/07/13/hello-world/&via=Mr Zhang" target="_blank" class="mdui-ripple">分享到 Twitter</a>
+              <a href="https://twitter.com/intent/tweet?text=git知识&url=http://example.com/2021/07/15/git-zh/&via=Mr Zhang" target="_blank" class="mdui-ripple">分享到 Twitter</a>
             </li>
             <li class="mdui-menu-item">
-              <a href="https://www.facebook.com/sharer/sharer.php?u=http://example.com/2021/07/13/hello-world/" target="_blank" class="mdui-ripple">分享到 Facebook</a>
+              <a href="https://www.facebook.com/sharer/sharer.php?u=http://example.com/2021/07/15/git-zh/" target="_blank" class="mdui-ripple">分享到 Facebook</a>
             </li>
             <li class="mdui-menu-item">
-              <a href="https://plus.google.com/share?url=http://example.com/2021/07/13/hello-world/" target="_blank" class="mdui-ripple">分享到 Google+</a>
+              <a href="https://plus.google.com/share?url=http://example.com/2021/07/15/git-zh/" target="_blank" class="mdui-ripple">分享到 Google+</a>
             </li>
             <li class="mdui-menu-item">
-              <a href="https://www.linkedin.com/shareArticle?mini=true&url=http://example.com/2021/07/13/hello-world/&title=项目创建说明" target="_blank" class="mdui-ripple">分享到 LinkedIn</a>
+              <a href="https://www.linkedin.com/shareArticle?mini=true&url=http://example.com/2021/07/15/git-zh/&title=git知识" target="_blank" class="mdui-ripple">分享到 LinkedIn</a>
             </li>
             <li class="mdui-menu-item">
-              <a href="http://connect.qq.com/widget/shareqq/index.html?site=幸福的小猪&title=项目创建说明&pics=http://example.com/images/favicon.png&url=http://example.com/2021/07/13/hello-world/" target="_blank" class="mdui-ripple">分享到 QQ</a>
+              <a href="http://connect.qq.com/widget/shareqq/index.html?site=幸福的小猪&title=git知识&pics=http://example.com/images/favicon.png&url=http://example.com/2021/07/15/git-zh/" target="_blank" class="mdui-ripple">分享到 QQ</a>
             </li>
             <li class="mdui-menu-item">
-              <a href="https://telegram.me/share/url?url=http://example.com/2021/07/13/hello-world/&text=项目创建说明" target="_blank" class="mdui-ripple">分享到 Telegram</a>
+              <a href="https://telegram.me/share/url?url=http://example.com/2021/07/15/git-zh/&text=git知识" target="_blank" class="mdui-ripple">分享到 Telegram</a>
             </li>
           </ul>
         
       </div>
     </header>
     <div class="mdui-card-content mdui-typo">
-      <p>欢迎光临[Hexo] (<a target="_blank" rel="noopener" href="https://hexo.io/">https://hexo.io/</a>) !这是你的第一个帖子。查看<a target="_blank" rel="noopener" href="https://hexo.io/docs/">文档</a>获取更多信息。如果你在使用 Hexo 时有任何问题，你可以在<a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">疑难解答</a>中找到答案，或者你可以在<a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>上问我。</p>
-<h2 id="快速启动"><a href="#快速启动" class="headerlink" title="快速启动"></a>快速启动</h2><h3 id="创建一个新帖子"><a href="#创建一个新帖子" class="headerlink" title="创建一个新帖子"></a>创建一个新帖子</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+      <!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-<p>更多信息: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="运行服务器"><a href="#运行服务器" class="headerlink" title="运行服务器"></a>运行服务器</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p><strong>Table of Contents</strong> <em>generated with <a target="_blank" rel="noopener" href="https://github.com/thlorenz/doctoc">DocToc</a></em></p>
+<ul>
+<li><a href="#rebase-%E5%90%88%E5%B9%B6">Rebase 合并</a></li>
+<li><a href="#stash">stash</a></li>
+<li><a href="#reflog">reflog</a></li>
+<li><a href="#reset">Reset</a></li>
+</ul>
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-<p>更多信息: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="生成静态文件"><a href="#生成静态文件" class="headerlink" title="生成静态文件"></a>生成静态文件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>本文不会介绍 Git 的基本操作，会对一些高级操作进行说明。</p>
+<h2 id="Rebase-合并"><a href="#Rebase-合并" class="headerlink" title="Rebase 合并"></a>Rebase 合并</h2><p>该命令可以让和 <code>merge</code> 命令得到的结果基本是一致的。</p>
+<p>通常使用 <code>merge</code> 操作将分支上的代码合并到 <code>master</code> 中，分支样子如下所示</p>
+<p><img src="/images/2019-06-01-043128.png"></p>
+<p>使用 <code>rebase</code> 后，会将 <code>develop</code> 上的 <code>commit</code> 按顺序移到 <code>master</code> 的第三个 <code>commit</code> 后面，分支样子如下所示</p>
+<p><img src="/images/2019-06-01-043129.png"></p>
+<p>Rebase 对比 merge，优势在于合并后的结果很清晰，只有一条线，劣势在于如果一旦出现冲突，解决冲突很麻烦，可能要解决多个冲突，但是 merge 出现冲突只需要解决一次。</p>
+<p>使用 rebase 应该在需要被 rebase 的分支上操作，并且该分支是本地分支。如果 <code>develop</code> 分支需要 rebase 到 <code>master</code> 上去，那么应该如下操作</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"><span class="comment"># branch develop</span></span></span><br><span class="line">git rebase master</span><br><span class="line">git checkout master</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment"># 用于将 `master` 上的 HEAD 移动到最新的 commit</span></span></span><br><span class="line">git merge develop</span><br></pre></td></tr></table></figure>
 
-<p>更多信息: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="部署到远程站点"><a href="#部署到远程站点" class="headerlink" title="部署到远程站点"></a>部署到远程站点</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<h2 id="stash"><a href="#stash" class="headerlink" title="stash"></a>stash</h2><p><code>stash</code> 用于临时保存工作目录的改动。开发中可能会遇到代码写一半需要切分支打包的问题，如果这时候你不想 <code>commit</code> 的话，就可以使用该命令。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git stash</span><br></pre></td></tr></table></figure>
 
-<p>更多信息: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+<p>使用该命令可以暂存你的工作目录，后面想恢复工作目录，只需要使用</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git stash pop</span><br></pre></td></tr></table></figure>
+
+<p>这样你之前临时保存的代码又回来了</p>
+<h2 id="reflog"><a href="#reflog" class="headerlink" title="reflog"></a>reflog</h2><p><code>reflog</code> 可以看到 HEAD 的移动记录，假如之前误删了一个分支，可以通过 <code>git reflog</code> 看到移动 HEAD 的哈希值</p>
+<p><img src="/images/2019-06-01-43130.png"></p>
+<p>从图中可以看出，HEAD 的最后一次移动行为是 <code>merge</code> 后，接下来分支 <code>new</code> 就被删除了，那么我们可以通过以下命令找回 <code>new</code> 分支</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git checkout 37d9aca</span><br><span class="line">git checkout -b new</span><br></pre></td></tr></table></figure>
+
+<p>PS：<code>reflog</code> 记录是时效的，只会保存一段时间内的记录。</p>
+<h2 id="Reset"><a href="#Reset" class="headerlink" title="Reset"></a>Reset</h2><p>如果你想删除刚写的 commit，就可以通过以下命令实现</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset --hard HEAD^</span><br></pre></td></tr></table></figure>
+
+<p>但是 <code>reset</code> 的本质并不是删除了 commit，而是重新设置了 HEAD 和它指向的 branch。</p>
 
       
       <blockquote>
         
-        <strong>本文链接：</strong><br><a href="http://example.com/2021/07/13/hello-world/">http://example.com/2021/07/13/hello-world/</a>
+        <strong>本文链接：</strong><br><a href="http://example.com/2021/07/15/git-zh/">http://example.com/2021/07/15/git-zh/</a>
       </blockquote>
     </div>
     <footer class="mdui-card-actions">
@@ -260,12 +290,17 @@
 
   <nav id="paginator">
     
-      <a rel="prev" class="extend prev" href="/2021/07/15/algorithm-ch/">
+      <a rel="prev" class="extend prev" href="/2021/07/15/JS-ch/">
         <button aria-label="prev" class="mdui-btn mdui-btn-raised mdui-btn-icon mdui-color-theme-accent mdui-ripple"><i class="mdui-icon material-icons">arrow_back</i></button>
-        <span class="mdui-p-x-3" mdui-tooltip="{content: '算法'}">上一篇</span>
+        <span class="mdui-p-x-3" mdui-tooltip="{content: 'JS相关知识'}">上一篇</span>
       </a>
     
     <div class="spacer"></div>
+    
+      <a rel="next" class="extend next" href="/2021/07/15/vue-zh/">
+        <span class="mdui-p-x-3" mdui-tooltip="{content: 'vue相关知识'}">下一篇</span>
+        <button aria-label="next" class="mdui-btn mdui-btn-raised mdui-btn-icon mdui-color-theme-accent mdui-ripple"><i class="mdui-icon material-icons">arrow_forward</i></button>
+      </a>
     
   </nav>
 
