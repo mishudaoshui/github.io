@@ -10,12 +10,12 @@
   
   <title>网络请求知识 | 幸福的小猪</title>
 
-  <link rel="shortcut icon" href="/images/favicon.png">
-  <link rel="alternate" href="/atom.xml" title="幸福的小猪" type="application/atom+xml">
+  <link rel="shortcut icon" href="/github.io/images/favicon.png">
+  <link rel="alternate" href="/github.io/atom.xml" title="幸福的小猪" type="application/atom+xml">
   <meta name="description" content="Table of Contents generated with DocToc  UDP 面向报文 不可靠性 高效 传输方式   TCP 头部 状态机 建立连接三次握手 断开链接四次握手   ARQ 协议 停止等待 ARQ 连续 ARQ 累计确认   滑动窗口 Zero 窗口   拥塞处理 慢开始算法 拥塞避免算法 快速重传 TCP New Ren 改进后的快恢复     HTTP Post">
 <meta property="og:type" content="article">
 <meta property="og:title" content="网络请求知识">
-<meta property="og:url" content="http://example.com/2021/07/15/Network-zh/index.html">
+<meta property="og:url" content="https://mishudaoshui.github.io/github.io/2021/07/15/Network-zh/index.html">
 <meta property="og:site_name" content="幸福的小猪">
 <meta property="og:description" content="Table of Contents generated with DocToc  UDP 面向报文 不可靠性 高效 传输方式   TCP 头部 状态机 建立连接三次握手 断开链接四次握手   ARQ 协议 停止等待 ARQ 连续 ARQ 累计确认   滑动窗口 Zero 窗口   拥塞处理 慢开始算法 拥塞避免算法 快速重传 TCP New Ren 改进后的快恢复     HTTP Post">
 <meta property="og:locale" content="zh_CN">
@@ -44,30 +44,30 @@
 
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="application-name" content="幸福的小猪">
-  <meta name="msapplication-starturl" content="http://example.com/2021/07/15/Network-zh/">
+  <meta name="msapplication-starturl" content="https://mishudaoshui.github.io/github.io/github.io/2021/07/15/Network-zh/">
   <meta name="msapplication-navbutton-color" content="#9C27B0">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-title" content="幸福的小猪">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <link rel="apple-touch-icon" href="/images/favicon.png">
+  <link rel="apple-touch-icon" href="/github.io/images/favicon.png">
 
   
-    <link rel="canonical" href="http://example.com/2021/07/15/Network-zh/">
-  
-
-  
+    <link rel="canonical" href="https://mishudaoshui.github.io/github.io/github.io/2021/07/15/Network-zh/">
   
 
   
   
+
+  
+  
   
 
   
-<link rel="stylesheet" href="/css/mdui.css">
-<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/github.io/css/mdui.css">
+<link rel="stylesheet" href="/github.io/css/style.css">
 
   
-<link rel="stylesheet" href="/custom.css">
+<link rel="stylesheet" href="/github.io/custom.css">
 
 <meta name="generator" content="Hexo 5.4.0"></head>
 <body class="mdui-appbar-with-toolbar mdui-theme-primary-indigo mdui-theme-accent-pink">
@@ -77,23 +77,23 @@
   <header id="header" class="mdui-appbar mdui-appbar-fixed mdui-appbar-scroll-hide mdui-appbar-inset">
   <div class="mdui-toolbar mdui-color-theme">
     <a href="javascript:;" class="mdui-btn mdui-btn-icon" mdui-drawer="{target: '#sidebar', swipe: true}"><i class="mdui-icon material-icons">menu</i></a>
-    <a href="/" class="mdui-typo-headline">幸福的小猪</a>
+    <a href="/github.io/" class="mdui-typo-headline">幸福的小猪</a>
     <div class="mdui-toolbar-spacer"></div>
     <a href="javascript:;" class="mdui-btn mdui-btn-icon" mdui-dialog="{target: '#search'}" mdui-tooltip="{content: '搜索'}"><i class="mdui-icon material-icons">search</i></a>
-    <a href="/atom.xml" class="mdui-btn mdui-btn-icon" mdui-tooltip="{content: 'RSS'}"><i class="mdui-icon material-icons">rss_feed</i></a>
+    <a href="/github.io/atom.xml" class="mdui-btn mdui-btn-icon" mdui-tooltip="{content: 'RSS'}"><i class="mdui-icon material-icons">rss_feed</i></a>
   </div>
 </header>
 <div class="mdui-dialog" id="search">
   
-    <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="请输入关键字"><input type="hidden" name="sitesearch" value="http://example.com"></form>
+    <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="请输入关键字"><input type="hidden" name="sitesearch" value="https://mishudaoshui.github.io/github.io"></form>
     <div class="search-result"></div>
   
 </div>
   <aside id="sidebar" class="mdui-drawer mdui-drawer-full-height">
   <script>var a=localStorage.getItem("mdui-drawer-close");if(a){document.getElementById("sidebar").className+=" mdui-drawer-close"};</script>
   <div class="mdui-grid-tile">
-    <img src="/images/banner.png" style="height: 160px;">
-    <img src="/images/avatar.png" class="avatar-animation" style="position: absolute; top: 10%; left: 24px; width: 64px; height: 64px; border: 2px solid #fff; border-radius: 50%;">
+    <img src="/github.io/images/banner.png" style="height: 160px;">
+    <img src="/github.io/images/avatar.png" class="avatar-animation" style="position: absolute; top: 10%; left: 24px; width: 64px; height: 64px; border: 2px solid #fff; border-radius: 50%;">
     <div class="mdui-grid-tile-actions">
       <div class="mdui-grid-tile-text">
         <div class="mdui-grid-tile-title">Mr Zhang</div>
@@ -104,7 +104,7 @@
   </div>
 
   <div class="mdui-list" mdui-collapse="{accordion: true}">
-    <a href="/" class="mdui-list-item mdui-ripple">
+    <a href="/github.io/" class="mdui-list-item mdui-ripple">
       <i class="mdui-list-item-icon mdui-icon material-icons mdui-text-color-blue">home</i>
       <div class="mdui-list-item-content">主页</div>
     </a>
@@ -117,7 +117,7 @@
       </div>
       <div class="mdui-collapse-item-body mdui-list mdui-list-dense">
         
-        <a class="mdui-ripple sidebar_archives-link" href="/archives/2021/07/">七月 2021<span class="mdui-ripple sidebar_archives-count">14</span></a>
+        <a class="mdui-ripple sidebar_archives-link" href="/github.io/archives/2021/07/">七月 2021<span class="mdui-ripple sidebar_archives-count">14</span></a>
         
       </div>
     </div>
@@ -151,7 +151,7 @@
         
       </div>
     </div>
-    <a href="/about" class="mdui-list-item mdui-ripple">
+    <a href="/github.io/about" class="mdui-list-item mdui-ripple">
       <i class="mdui-list-item-icon mdui-icon material-icons mdui-text-color-purple">person</i>
       <div class="mdui-list-item-content">关于</div>
     </a>
@@ -161,11 +161,11 @@
 
   <div class="mdui-list" mdui-collapse="{accordion: true}">
     
-      <a href="/timeline" class="mdui-list-item mdui-ripple">时间轴</a>
+      <a href="/github.io/timeline" class="mdui-list-item mdui-ripple">时间轴</a>
     
-      <a href="/tagcloud" class="mdui-list-item mdui-ripple">标签云</a>
+      <a href="/github.io/tagcloud" class="mdui-list-item mdui-ripple">标签云</a>
     
-      <a href="/gallery" class="mdui-list-item mdui-ripple">相册</a>
+      <a href="/github.io/gallery" class="mdui-list-item mdui-ripple">相册</a>
     
     <div class="mdui-collapse-item">
       <script>var a=localStorage.getItem("mdui-collapse-item-3");if(a){document.getElementsByClassName("mdui-collapse-item")[3].className+=" mdui-collapse-item-open"};</script>
@@ -189,7 +189,7 @@
   <style>#main article .mdui-card-content .center-block{display:block!important;margin-right:auto!important;margin-left:auto!important}</style>
   <article class="mdui-card mdui-m-b-5">
     <header class="mdui-card-media">
-      <img src="/images/random/material-14.png" style="max-height: 240px;">
+      <img src="/images/random/material-13.png" style="max-height: 240px;">
       <div class="mdui-card-media-covered">
         <div class="mdui-card-primary">
           <div class="mdui-card-primary-title">网络请求知识</div>
@@ -205,7 +205,7 @@
             
             <li class="mdui-menu-item" disabled>
               
-                <img src="http://qr.liantu.com/api.php?w=246&m=10&text=http://example.com/2021/07/15/Network-zh/">
+                <img src="http://qr.liantu.com/api.php?w=246&m=10&text=https://mishudaoshui.github.io/github.io/2021/07/15/Network-zh/">
               
             </li>
           </ul>
@@ -214,25 +214,25 @@
           <button class="mdui-btn mdui-btn-icon mdui-text-color-white" mdui-menu="{target: '#share_menu', align: 'right'}"><i class="mdui-icon material-icons">share</i></button>
           <ul class="mdui-menu" id="share_menu">
             <li class="mdui-menu-item">
-              <a href="http://service.weibo.com/share/share.php?appkey=&title=网络请求知识&url=http://example.com/2021/07/15/Network-zh/&pic=http://example.com/images/favicon.png&searchPic=false&style=simple" target="_blank" class="mdui-ripple">分享到 Weibo</a>
+              <a href="http://service.weibo.com/share/share.php?appkey=&title=网络请求知识&url=https://mishudaoshui.github.io/github.io/2021/07/15/Network-zh/&pic=https://mishudaoshui.github.io/github.io/github.io/images/favicon.png&searchPic=false&style=simple" target="_blank" class="mdui-ripple">分享到 Weibo</a>
             </li>
             <li class="mdui-menu-item">
-              <a href="https://twitter.com/intent/tweet?text=网络请求知识&url=http://example.com/2021/07/15/Network-zh/&via=Mr Zhang" target="_blank" class="mdui-ripple">分享到 Twitter</a>
+              <a href="https://twitter.com/intent/tweet?text=网络请求知识&url=https://mishudaoshui.github.io/github.io/2021/07/15/Network-zh/&via=Mr Zhang" target="_blank" class="mdui-ripple">分享到 Twitter</a>
             </li>
             <li class="mdui-menu-item">
-              <a href="https://www.facebook.com/sharer/sharer.php?u=http://example.com/2021/07/15/Network-zh/" target="_blank" class="mdui-ripple">分享到 Facebook</a>
+              <a href="https://www.facebook.com/sharer/sharer.php?u=https://mishudaoshui.github.io/github.io/2021/07/15/Network-zh/" target="_blank" class="mdui-ripple">分享到 Facebook</a>
             </li>
             <li class="mdui-menu-item">
-              <a href="https://plus.google.com/share?url=http://example.com/2021/07/15/Network-zh/" target="_blank" class="mdui-ripple">分享到 Google+</a>
+              <a href="https://plus.google.com/share?url=https://mishudaoshui.github.io/github.io/2021/07/15/Network-zh/" target="_blank" class="mdui-ripple">分享到 Google+</a>
             </li>
             <li class="mdui-menu-item">
-              <a href="https://www.linkedin.com/shareArticle?mini=true&url=http://example.com/2021/07/15/Network-zh/&title=网络请求知识" target="_blank" class="mdui-ripple">分享到 LinkedIn</a>
+              <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://mishudaoshui.github.io/github.io/2021/07/15/Network-zh/&title=网络请求知识" target="_blank" class="mdui-ripple">分享到 LinkedIn</a>
             </li>
             <li class="mdui-menu-item">
-              <a href="http://connect.qq.com/widget/shareqq/index.html?site=幸福的小猪&title=网络请求知识&pics=http://example.com/images/favicon.png&url=http://example.com/2021/07/15/Network-zh/" target="_blank" class="mdui-ripple">分享到 QQ</a>
+              <a href="http://connect.qq.com/widget/shareqq/index.html?site=幸福的小猪&title=网络请求知识&pics=https://mishudaoshui.github.io/github.io/github.io/images/favicon.png&url=https://mishudaoshui.github.io/github.io/2021/07/15/Network-zh/" target="_blank" class="mdui-ripple">分享到 QQ</a>
             </li>
             <li class="mdui-menu-item">
-              <a href="https://telegram.me/share/url?url=http://example.com/2021/07/15/Network-zh/&text=网络请求知识" target="_blank" class="mdui-ripple">分享到 Telegram</a>
+              <a href="https://telegram.me/share/url?url=https://mishudaoshui.github.io/github.io/2021/07/15/Network-zh/&text=网络请求知识" target="_blank" class="mdui-ripple">分享到 Telegram</a>
             </li>
           </ul>
         
@@ -735,7 +735,7 @@
       
       <blockquote>
         
-        <strong>本文链接：</strong><br><a href="http://example.com/2021/07/15/Network-zh/">http://example.com/2021/07/15/Network-zh/</a>
+        <strong>本文链接：</strong><br><a href="https://mishudaoshui.github.io/github.io/2021/07/15/Network-zh/">https://mishudaoshui.github.io/github.io/2021/07/15/Network-zh/</a>
       </blockquote>
     </div>
     <footer class="mdui-card-actions">
@@ -753,14 +753,14 @@
 
   <nav id="paginator">
     
-      <a rel="prev" class="extend prev" href="/2021/07/15/performance-ch/">
+      <a rel="prev" class="extend prev" href="/github.io/2021/07/15/performance-ch/">
         <button aria-label="prev" class="mdui-btn mdui-btn-raised mdui-btn-icon mdui-color-theme-accent mdui-ripple"><i class="mdui-icon material-icons">arrow_back</i></button>
         <span class="mdui-p-x-3" mdui-tooltip="{content: '性能优化'}">上一篇</span>
       </a>
     
     <div class="spacer"></div>
     
-      <a rel="next" class="extend next" href="/2021/07/15/mp-ch/">
+      <a rel="next" class="extend next" href="/github.io/2021/07/15/mp-ch/">
         <span class="mdui-p-x-3" mdui-tooltip="{content: '小程序相关知识'}">下一篇</span>
         <button aria-label="next" class="mdui-btn mdui-btn-raised mdui-btn-icon mdui-color-theme-accent mdui-ripple"><i class="mdui-icon material-icons">arrow_forward</i></button>
       </a>
@@ -794,11 +794,11 @@
   <button id="gotop" class="mdui-fab mdui-fab-fixed mdui-fab-hide mdui-color-theme-accent mdui-ripple"><i class="mdui-icon material-icons">arrow_upward</i></button>
   
   
-<script src="/js/mdui.js"></script>
-<script src="/js/script.js"></script>
+<script src="/github.io/js/mdui.js"></script>
+<script src="/github.io/js/script.js"></script>
 
   
-<script src="/custom.js"></script>
+<script src="/github.io/custom.js"></script>
 
 </body>
 </html>
